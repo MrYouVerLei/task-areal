@@ -16,3 +16,13 @@ document.addEventListener('click', (e) => {
         menu.classList.remove('active');
     });
 });
+
+var modal = document.querySelector(".modal");
+
+function openModalWindow() {
+    modal.style.display = "block";
+}
+
+function closeModalWindow() {
+  modal.style.display = "none";
+}

@@ -61,7 +61,7 @@
                 <div class="menu-container">
                   <button class="menu-button" onclick="toggleMenu(event, this)">⋮</button>
                   <div class="dropdown-menu">
-                    <button class="dropdown-menu__item">Подробнее</button>
+                    <button class="dropdown-menu__item" onclick="openModalWindow()">Подробнее</button>
                     <button class="dropdown-menu__item">Редактировать</button>
                     <button class="dropdown-menu__item dropdown-menu__item__delete">Уволить</button>
                   </div>
@@ -70,6 +70,21 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div class="modal">
+        <div class="modal-content">
+          <h2>Информация о сотруднике</h2>
+          <div>ФИО:</div>
+          <div>Дата рождения:</div>
+          <div>Паспорт:</div>
+          <div>Отдел:</div>
+          <div>Должность:</div>
+          <div>Статус:</div>
+          <div>Размер зарплаты:</div>
+          <div>Дата принятия на работу:</div>
+          <div>Контактная информация:</div>
+          <button class="modal-content__button" onclick="closeModalWindow()">Закрыть</button>
+        </div>
       </div>
     </main>
   </div>
