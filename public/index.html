@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="./style.css">
+  <script defer src="script.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HR</title>
+</head>
+
+<body>
+  <div id="app">
+    <main>
+      <div class="employee-search-filters">
+        <div class="employee-search-filters__inputs">
+          <div class="text">Поиск:</div>
+          <input type="text" class="employee-search-filters__input" placeholder="Фамилия">
+          <input type="text" class="employee-search-filters__input" placeholder="Имя">
+          <input type="text" class="employee-search-filters__input" placeholder="Отчество">
+        </div>
+        <div class="employee-search-filters__selects">
+          <div class="select-container">
+            <div class="text">Отдел:</div>
+            <select class="select-container__select">
+              <option value="" selected>Не указано</option>
+            </select>
+          </div>
+          <div class="select-container">
+            <div class="text">Должность:</div>
+            <select class="select-container__select">
+              <option value="" selected>Не указано</option>
+            </select>
+          </div>
+        </div>
+        <div class="employee-search-filters__buttons">
+          <button class="employee-search-filters__button">Применить</button>
+          <button class="employee-search-filters__button">Сбросить</button>
+        </div>
+      </div>
+      <div>
+        <table>
+          <thead>
+            <tr>
+              <th>ФИО</th>
+              <th>Отдел</th>
+              <th>Должность</th>
+              <th>Статус</th>
+              <th>Дата принятия на работу</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Иванов Иван Иванович</td>
+              <td>Отдел разработки</td>
+              <td>Разработчик</td>
+              <td>Работает</td>
+              <td>20-02-2020</td>
+              <td>
+                <div class="menu-container">
+                  <button class="menu-button" onclick="toggleMenu(event, this)">⋮</button>
+                  <div class="dropdown-menu">
+                    <button class="dropdown-menu__item">Подробнее</button>
+                    <button class="dropdown-menu__item">Редактировать</button>
+                    <button class="dropdown-menu__item dropdown-menu__item__delete">Уволить</button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</body>
+
+</html>
