@@ -22,13 +22,13 @@
         <div class="employee-search-filters__selects">
           <div class="select-container">
             <div class="text">Отдел:</div>
-            <select class="select-container__select">
+            <select id="departments-select" class="select-container__select">
               <option value="" selected>Не указано</option>
             </select>
           </div>
           <div class="select-container">
             <div class="text">Должность:</div>
-            <select class="select-container__select">
+            <select id="positions-select" class="select-container__select">
               <option value="" selected>Не указано</option>
             </select>
           </div>
@@ -59,15 +59,15 @@
       <dialog id="info-dialog" class="dialog">
         <div class="dialog-content">
           <h2>Информация о сотруднике</h2>
-          <div>ФИО:</div>
-          <div>Дата рождения:</div>
-          <div>Паспорт:</div>
-          <div>Отдел:</div>
-          <div>Должность:</div>
-          <div>Статус:</div>
-          <div>Размер зарплаты:</div>
-          <div>Дата принятия на работу:</div>
-          <div>Контактная информация:</div>
+          <div>ФИО: <span id="info__full-name"></span></div>
+          <div>Дата рождения: <span id="info__birth-date"></span></div>
+          <div>Паспорт: <span id="info__passport"></span></div>
+          <div>Отдел: <span id="info__department-name"></span></div>
+          <div>Должность: <span id="info__position-name"></span></div>
+          <div>Статус: <span id="info__status"></span></div>
+          <div>Размер зарплаты: <span id="info__salary"></span></div>
+          <div>Дата принятия на работу: <span id="info__hire-date"></span></div>
+          <div>Контактная информация: <span id="info__phone-email"></span></div>
           <button class="dialog-content__button" onclick="closeInfoDialog()">Закрыть</button>
         </div>
       </dialog>
