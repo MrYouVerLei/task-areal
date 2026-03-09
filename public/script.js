@@ -17,12 +17,21 @@ document.addEventListener('click', (e) => {
     });
 });
 
-var modal = document.querySelector(".modal");
+var infoDialog = document.getElementById("info-dialog");
+var formDialog = document.getElementById("form-dialog");
 
-function openModalWindow() {
-    modal.style.display = "block";
+function openDialog() {
+    infoDialog.showModal();
 }
 
-function closeModalWindow() {
-  modal.style.display = "none";
+function closeDialog() {
+    infoDialog.close();
+}
+
+function openFormDialog() {
+    formDialog.showModal();
+}
+
+function closeFormDialog() {
+    formDialog.close();
 }
