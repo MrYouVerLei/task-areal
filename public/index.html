@@ -50,24 +50,8 @@
               <th></th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Иванов Иван Иванович</td>
-              <td>Отдел разработки</td>
-              <td>Разработчик</td>
-              <td>Работает</td>
-              <td>20-02-2020</td>
-              <td>
-                <div class="menu-container">
-                  <button class="menu-button" onclick="toggleMenu(event, this)">⋮</button>
-                  <div class="dropdown-menu">
-                    <button class="dropdown-menu__item" onclick="openDialog()">Подробнее</button>
-                    <button class="dropdown-menu__item">Редактировать</button>
-                    <button class="dropdown-menu__item dropdown-menu__item__delete">Уволить</button>
-                  </div>
-                </div>
-              </td>
-            </tr>
+          <tbody id="table">
+            
           </tbody>
         </table>
         <button class="add-button" onclick="openFormDialog()">+</button>
@@ -84,7 +68,7 @@
           <div>Размер зарплаты:</div>
           <div>Дата принятия на работу:</div>
           <div>Контактная информация:</div>
-          <button class="dialog-content__button" onclick="closeDialog()">Закрыть</button>
+          <button class="dialog-content__button" onclick="closeInfoDialog()">Закрыть</button>
         </div>
       </dialog>
       <dialog id="form-dialog" class="dialog">
