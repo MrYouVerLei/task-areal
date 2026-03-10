@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="./style.css">
-  <!-- С npm пакета не пошли маски, пришлось так покдлючать -->
+  <!-- С npm пакета не пошли маски, пришлось так подключать -->
   <script src="https://unpkg.com/imask"></script>
   <script defer src="script.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -17,25 +17,25 @@
       <div class="employee-search-filters">
         <div class="employee-search-filters__inputs">
           <div class="text">Поиск:</div>
-          <input type="text" class="employee-search-filters__input" placeholder="Фамилия">
-          <input type="text" class="employee-search-filters__input" placeholder="Имя">
-          <input type="text" class="employee-search-filters__input" placeholder="Отчество">
+          <input type="text" id="search__last-name" class="employee-search-filters__input" placeholder="Фамилия">
+          <input type="text" id="search__first-name" class="employee-search-filters__input" placeholder="Имя">
+          <input type="text" id="search__patronymic" class="employee-search-filters__input" placeholder="Отчество">
         </div>
         <div class="employee-search-filters__selects">
           <div class="select-container">
             <div class="text">Отдел:</div>
-            <select id="departments-select" class="select-container__select">
+            <select id="filter__departments-select" class="select-container__select">
             </select>
           </div>
           <div class="select-container">
             <div class="text">Должность:</div>
-            <select id="positions-select" class="select-container__select">
+            <select id="filter__positions-select" class="select-container__select">
             </select>
           </div>
         </div>
         <div class="employee-search-filters__buttons">
-          <button class="employee-search-filters__button">Применить</button>
-          <button class="employee-search-filters__button">Сбросить</button>
+          <button id="filter__apply-button" class="employee-search-filters__button" onclick="filterAndSearch()">Применить</button>
+          <button id="filter__reset-button" class="employee-search-filters__button" onclick="resetFilterAndSearch()">Сбросить</button>
         </div>
       </div>
       <div>

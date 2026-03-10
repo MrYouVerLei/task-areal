@@ -1,4 +1,5 @@
 import models from "../../models/index.js";
+import { Op } from 'sequelize';
 const { Department, Employee, Position } = models;
 
 class EmployeeService {
@@ -86,10 +87,10 @@ class EmployeeService {
         if (patronymic) {
             whereCombo.patronymic = { [Op.iLike]: `%${patronymic}%` };
         }
-        if (departmentId) {
+        if (departmentId && departmentId != 0) {
             whereCombo.department_id = departmentId;
         }
-        if (positionId) {
+        if (positionId && positionId != 0) {
             whereCombo.position_id = positionId;
         }
 
@@ -98,6 +99,11 @@ class EmployeeService {
             include: [
                 { model: Department, attributes: ['name'] },
                 { model: Position, attributes: ['name'] }
+            ],
+            order: [
+                ['last_name'],
+                ['first_name'],
+                ['patronymic']
             ]
         });
 

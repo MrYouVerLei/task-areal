@@ -70,8 +70,8 @@ function toggleMenu(event, button) {
 }
 
 renderTable();
-fillDepartments('departments-select', true);
-fillPositions('positions-select', true);
+fillDepartments('filter__departments-select', true);
+fillPositions('filter__positions-select', true);
 
 async function saveForm() {
     const form = document.getElementById('form');
@@ -98,18 +98,18 @@ async function saveForm() {
         return;
     }
 
-    if (data.department_id == "0") {
+    data.department_id = Number(data.department_id);
+    data.position_id = Number(data.position_id);
+
+    if (!data.department_id) {
         alert('Выберите отдел');
         return;
     }
 
-    if (data.position_id == "0") {
+    if (!data.position_id) {
         alert('Выберите должность');
         return;
     }
-
-    data.department_id = Number(data.department_id);
-    data.position_id = Number(data.position_id);
 
     if (passportMask) {
         const passport = passportMask.unmaskedValue;
@@ -132,7 +132,7 @@ async function saveForm() {
             body: JSON.stringify(data)
         });
 
-        if (response.status == 201) {
+        if (response.ok) {
             formDialog.close();
             // По хорошему надо бы рендерить не всю таблицу
             await renderTable();
@@ -199,11 +199,13 @@ async function getEmployee(id) {
     }
 }
 
-async function renderTable() {
+async function renderTable(employees = null) {
     const table = document.getElementById('table');
 
     if (table != null) {
-        const employees = await getAllEmployees();
+        if (!employees) {
+            employees = await getAllEmployees();
+        }
         let html = '';
         employees.forEach(employee => {
             if (employee.status == "Уволен") {
@@ -393,4 +395,65 @@ async function renderAddForm() {
     document.getElementById('form__title').textContent = "Добавление сотрудника";
 
     formDialog.showModal();
+}
+
+async function filterAndSearch() {
+    const lastName = document.getElementById('search__last-name').value.trim();
+    const firstName = document.getElementById('search__first-name').value.trim();
+    const patronymic = document.getElementById('search__patronymic').value.trim();
+    const departmentId = document.getElementById('filter__departments-select').value;
+    const positionId = document.getElementById('filter__positions-select').value;
+    const params = new URLSearchParams();
+
+    if (lastName) {
+        params.append('lastName', lastName);
+    }
+    if (firstName) {
+        params.append('firstName', firstName);
+    }
+    if (patronymic) {
+        params.append('patronymic', patronymic);
+    }
+    if (departmentId && departmentId != 0) {
+        params.append('departmentId', departmentId);
+    }
+    if (positionId && positionId != 0) {
+        params.append('positionId', positionId);
+    }
+
+    try {
+        const employeesResponse = await fetch(`/api/employees/search?${params.toString()}`);
+
+        if (employeesResponse.status != 200) {
+            return;
+        }
+
+        const employeesData = await employeesResponse.json();
+
+        const filteredData = employeesData.map(employee => {
+            return {
+                id: employee.id,
+                fullName: `${employee.last_name} ${employee.first_name} ${employee.patronymic}`,
+                departmentName: employee.Department.name,
+                positionName: employee.Position.name,
+                status: employee.is_working ? "Работает" : "Уволен",
+                hireDate: new Date(employee.hire_date).toLocaleDateString()
+            };
+        });
+
+        renderTable(filteredData);
+    } catch (err) {
+        console.error(err);
+        return;
+    }
+}
+
+async function resetFilterAndSearch() {
+    document.getElementById('search__last-name').value = '';
+    document.getElementById('search__first-name').value = '';
+    document.getElementById('search__patronymic').value = '';
+    document.getElementById('filter__departments-select').value = 0;
+    document.getElementById('filter__positions-select').value = 0;
+
+    renderTable();
 }
