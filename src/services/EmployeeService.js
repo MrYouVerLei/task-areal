@@ -17,6 +17,11 @@ class EmployeeService {
             include: [
                 { model: Department, attributes: ['name'] },
                 { model: Position, attributes: ['name'] }
+            ],
+            order: [
+                ['last_name'],
+                ['first_name'],
+                ['patronymic']
             ]
         }
         );
@@ -29,8 +34,8 @@ class EmployeeService {
                 id: employeeId
             },
             include: [
-                { model: Department, attributes: ['name'] },
-                { model: Position, attributes: ['name'] }
+                { model: Department },
+                { model: Position }
             ]
         }
         );

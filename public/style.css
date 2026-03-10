@@ -97,7 +97,6 @@ th {
 td {
     padding: 15px 20px;
     border-bottom: 1px solid #bdbdbd;
-    color: #333;
     font-size: 1em;
     text-align: center;
 }
@@ -262,19 +261,18 @@ h2 {
     background-color: #3349c8;
 }
 
-#passport-series {
-    width: 70px;
+#form__passport {
+    width: 115px;
 }
 
-#passport-number {
-    width: 80px;
-}
-
-#birth-date,
-#hire-date,
-#phone,
-#salary {
+#form__birth-date,
+#form__hire-date,
+#form__salary {
     width: 130px;
+}
+
+#form__phone {
+    width: 155px;
 }
 
 .add-button {

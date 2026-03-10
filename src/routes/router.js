@@ -10,7 +10,7 @@ router.get('/departments', DepartmentController.getAllDepartments);
 router.get('/positions', PositionController.getAllPositions);
 router.get('/employees/:id', EmployeeController.getEmployee);
 router.get('/employees/search', EmployeeController.searchEmployees);
-router.patch('/employees/:id', EmployeeController.updateEmployee);
+router.put('/employees/:id', EmployeeController.updateEmployee);
 router.patch('/employees/:id/dismiss', EmployeeController.dismissEmployee);
 router.post('/employees', EmployeeController.createEmployee);
 

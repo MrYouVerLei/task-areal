@@ -4,6 +4,8 @@
 <head>
   <meta charset="utf-8" />
   <link rel="stylesheet" href="./style.css">
+  <!-- С npm пакета не пошли маски, пришлось так покдлючать -->
+  <script src="https://unpkg.com/imask"></script>
   <script defer src="script.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>HR</title>
@@ -23,13 +25,11 @@
           <div class="select-container">
             <div class="text">Отдел:</div>
             <select id="departments-select" class="select-container__select">
-              <option value="" selected>Не указано</option>
             </select>
           </div>
           <div class="select-container">
             <div class="text">Должность:</div>
             <select id="positions-select" class="select-container__select">
-              <option value="" selected>Не указано</option>
             </select>
           </div>
         </div>
@@ -51,10 +51,10 @@
             </tr>
           </thead>
           <tbody id="table">
-            
+
           </tbody>
         </table>
-        <button class="add-button" onclick="openFormDialog()">+</button>
+        <button class="add-button" onclick="renderAddForm()">+</button>
       </div>
       <dialog id="info-dialog" class="dialog">
         <div class="dialog-content">
@@ -72,70 +72,72 @@
         </div>
       </dialog>
       <dialog id="form-dialog" class="dialog">
-        <form class="form dialog-content">
-          <h2 id="title">Добавление сотрудника</h2>
+        <form id="form" class="dialog-content">
+          <h2 id="form__title">Добавление сотрудника</h2>
+          <input type="hidden" id="form__id" name="id">
           <div class="form__column">
             <div class="form__text">ФИО:</div>
             <div class="form__row">
-              <input type="text" id="last-name" class="form__input" placeholder="Иванов">
-              <input type="text" id="first-name" class="form__input" placeholder="Иван">
-              <input type="text" id="patronymic" class="form__input" placeholder="Иванович">
+              <input type="text" id="form__last-name" class="form__input" name="last_name" placeholder="Иванов" required
+                pattern="^[a-zA-Zа-яА-ЯёЁ\-]+$">
+              <input type="text" id="form__first-name" class="form__input" name="first_name" placeholder="Иван" required
+                pattern="^[a-zA-Zа-яА-ЯёЁ\-]+$">
+              <input type="text" id="form__patronymic" class="form__input" name="patronymic" placeholder="Иванович"
+                required pattern="^[a-zA-Zа-яА-ЯёЁ\-]+$">
             </div>
           </div>
           <div class="form__row">
             <div class="form__column">
               <div class="form__text">Дата рождения:</div>
-              <input type="date" id="birth-date" class="form__input" placeholder="02.02.2000">
+              <input type="date" id="form__birth-date" class="form__input" name="birth_date" required>
             </div>
             <div class="form__column">
               <div class="form__text">Паспорт:</div>
-              <div class="form__row">
-                <input type="text" id="passport-series" class="form__input" placeholder="Серия">
-                <input type="text" id="passport-number" class="form__input" placeholder="Номер">
-              </div>
+              <input type="text" id="form__passport" class="form__input" name="passport" placeholder="0000 000000"
+                required>
             </div>
           </div>
           <div class="form__row">
             <div class="form__column">
               <div class="form__text">Номер телефона:</div>
-              <input type="text" id="phone" class="form__input" placeholder="+79001112233">
+              <input type="text" id="form__phone" class="form__input" name="phone" placeholder="+7(000)000-00-00"
+                required>
             </div>
             <div class="form__column">
               <div class="form__text">Электронная почта:</div>
-              <input type="text" id="email" class="form__input" placeholder="ivanov@mail.ru">
+              <input type="text" id="form__email" class="form__input" name="email" placeholder="ivanov@mail.ru"
+                pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$">
             </div>
           </div>
           <div class="form__column">
             <div class="form__text">Адрес проживания:</div>
-            <input type="text" id="address" class="form__input" placeholder="">
+            <input type="text" id="form__address" class="form__input" name="address" placeholder="" required>
           </div>
           <div class="form__row">
             <div class="form__column">
               <div class="form__text">Отдел:</div>
-              <select class="select-container__select">
-                <option value="" selected>Не указано</option>
+              <select id="form__departments-select" class="select-container__select" name="department_id" required>
               </select>
             </div>
             <div class="form__column">
               <div class="form__text">Должность:</div>
-              <select class="select-container__select">
-                <option value="" selected>Не указано</option>
+              <select id="form__positions-select" class="select-container__select" name="position_id" required>
               </select>
             </div>
           </div>
           <div class="form__row">
             <div class="form__column">
               <div class="form__text">Размер зарплаты:</div>
-              <input type="text" id="salary" class="form__input" placeholder="50000">
+              <input type="text" id="form__salary" class="form__input" name="salary" placeholder="50000" required>
             </div>
             <div class="form__column">
               <div class="form__text">Дата принятия на работу:</div>
-              <input type="date" id="hire-date" class="form__input" placeholder="02.02.2020">
+              <input type="date" id="form__hire-date" class="form__input" name="hire_date" required>
             </div>
           </div>
           <div class="form__row">
-            <button class="form__button form__button-cancel" onclick="closeFormDialog()">Отмена</button>
-            <button class="form__button">Сохранить</button>
+            <button type="button" class="form__button form__button-cancel" onclick="closeFormDialog()">Отмена</button>
+            <button type="button" class="form__button" onclick="saveForm()">Сохранить</button>
           </div>
         </form>
       </dialog>
